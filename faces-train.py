@@ -33,12 +33,5 @@ for root , dirs, files  in os.walk(images_directory):
 
 
 
-while True:
-
-    cv2.imshow('Image', pictures[0])
-    if cv2.waitKey(1) == ord('q'):
-        break;
-
-
 print(labels_list)
 print(pictures)
