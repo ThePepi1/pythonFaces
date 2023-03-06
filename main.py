@@ -2,8 +2,8 @@ import numpy as np
 import cv2
 face_Cascade = cv2.CascadeClassifier('cascades\data\haarcascade_frontalface_alt.xml')
 face_Cascade2 = cv2.CascadeClassifier('cascades\data\haarcascade_frontalface_default.xml')
-
-
+recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer.read("trainner.yml")
 
 wCam, hCam = 1080, 1200
 cap = cv2.VideoCapture(0)
@@ -21,7 +21,8 @@ while True:
         region_of_interests_grey = gray_img[y:y+h, x:x+w] 
 
         #recognizing
-
+        path_id, conf = recognizer.predict(region_of_interests_grey)
+        
 
 
 
@@ -37,7 +38,7 @@ while True:
     #display video
     cv2.imshow('Image', img)
     if cv2.waitKey(1) == ord('q'):
-        break;
+        break
 
 cap.release()
 cv2.destroyAllWindows()
