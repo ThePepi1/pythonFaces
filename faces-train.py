@@ -28,7 +28,6 @@ for root , dirs, files  in os.walk(images_directory):
             
             id_ = paths[path]
             faces = face_Cascade2.detectMultiScale(image_array, scaleFactor = 1.3, minNeighbors = 5)
-            print(faces)
             for (x, y, w, h) in faces:
                 region_of_interests = image_array[y:y+h, x:x+w] 
                 pictures.append(region_of_interests)
