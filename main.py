@@ -23,37 +23,38 @@ Position = False
 while True:
     ret, img = cap.read()
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
+    x = y = end_coordinate_x = end_coordinate_y = 0
 
     #detecting a face (radius of interest)
-    if not Position:
-        faces = face_Cascade2.detectMultiScale(gray_img, scaleFactor = 1.3, minNeighbors = 5)
+    faces = face_Cascade2.detectMultiScale(gray_img, scaleFactor = 1.4, minNeighbors = 5)
     #showing face detection 
-        for (x, y, w, h,) in faces:
-            region_of_interests_grey = gray_img[y:y+h, x:x+w] 
+    for (x, y, w, h,) in faces:
+        region_of_interests_grey = gray_img[y:y+h, x:x+w] 
 
         #recognizing
-
+        if not Position:
             path_id, conf = recognizer.predict(region_of_interests_grey)
             photo = Image.open(new_paths[path_id])
             Position = True
             #drawing rectangle
-            color = (255, 0, 0)
-            stroke = 2
-            end_coordinate_x = x + w
-            end_coordinate_y = y + h
-            cv2.rectangle(img, (x,y),(end_coordinate_x, end_coordinate_y), color)
+        color = (255, 0, 0)
+        stroke = 2
+        end_coordinate_x = x + w
+        end_coordinate_y = y + h
+        cv2.rectangle(img, (x,y),(end_coordinate_x, end_coordinate_y), color)
         
         
 
 
     #display video
 
+    picture = img
     if Position:
-        picture = numpy.array(photo, "uint8")
-        picture = picture[:,:,::-1]
-    else:
-        picture = img
+        picture2 = numpy.array(photo, "uint8")
+        picture2 = picture2[:,:,::-1]
+        if x > 0:
+            picture[y:end_coordinate_y,x:end_coordinate_x] = cv2.resize(picture2, (end_coordinate_y - y, end_coordinate_x - x))
+
         
     cv2.imshow('Image', picture)
     if cv2.waitKey(1) == ord('q'):
