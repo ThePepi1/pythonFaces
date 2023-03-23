@@ -33,6 +33,7 @@ while True:
             region_of_interests_grey = gray_img[y:y+h, x:x+w] 
 
         #recognizing
+
             path_id, conf = recognizer.predict(region_of_interests_grey)
             photo = Image.open(new_paths[path_id])
             Position = True
