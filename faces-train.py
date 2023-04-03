@@ -28,7 +28,7 @@ for root , dirs, files  in os.walk(images_directory):
             
             id_ = paths[path]
             
-            faces = face_Cascade2.detectMultiScale(image_array, scaleFactor = 1.6, minNeighbors = 5)
+            faces = face_Cascade2.detectMultiScale(image_array, scaleFactor = 1.5, minNeighbors = 5)
             for (x, y, w, h) in faces:
                 region_of_interests = image_array[y:y+h, x:x+w] 
                 print(region_of_interests)
@@ -39,8 +39,12 @@ with open("labels.pickle", "wb") as f:
     pickle.dump(paths, f)  
 
 
-
-
+while True:
+    cv2.imshow('Image', pictures[0])
+    if cv2.waitKey(1) == ord('q'):
+        break
+    if cv2.waitKey(1) == ord('r'):
+        Position = False 
 
 
 
