@@ -3,7 +3,7 @@ from PIL import Image
 import numpy
 import cv2
 import pickle
-face_Cascade2 = cv2.CascadeClassifier('cascades\data\haarcascade_frontalface_alt.xml')
+face_Cascade2 = cv2.CascadeClassifier('cascades\data\haarcascade_frontalface_default.xml')
 BASE_directory = os.path.dirname(os.path.abspath(__file__))
 images_directory = os.path.join(BASE_directory, 'imgs')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -28,7 +28,7 @@ for root , dirs, files  in os.walk(images_directory):
             
             id_ = paths[path]
             
-            faces = face_Cascade2.detectMultiScale(image_array, scaleFactor = 1.8, minNeighbors = 5)
+            faces = face_Cascade2.detectMultiScale(image_array, scaleFactor = 1.5, minNeighbors = 5)
             for (x, y, w, h) in faces:
                 region_of_interests = image_array[y:y+h, x:x+w] 
                 print(region_of_interests)
