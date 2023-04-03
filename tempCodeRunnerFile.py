@@ -1,2 +1,1 @@
-
-wCam, hCam = 1080, 1200
+face_Cascade2
