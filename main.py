@@ -55,6 +55,7 @@ while True:
         if x > 0:
             picture[y:end_coordinate_y,x:end_coordinate_x] = cv2.resize(picture2, (end_coordinate_y - y, end_coordinate_x - x))
 
+
         
     cv2.imshow('Image', picture)
     if cv2.waitKey(1) == ord('q'):
