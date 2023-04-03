@@ -26,7 +26,7 @@ while True:
     x = y = end_coordinate_x = end_coordinate_y = 0
 
     #detecting a face (radius of interest)
-    faces = face_Cascade2.detectMultiScale(gray_img, scaleFactor = 1.4, minNeighbors = 5)
+    faces = face_Cascade2.detectMultiScale(gray_img, scaleFactor = 1.5, minNeighbors = 5)
     #showing face detection 
     for (x, y, w, h,) in faces:
         region_of_interests_grey = gray_img[y:y+h, x:x+w] 
