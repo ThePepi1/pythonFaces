@@ -40,7 +40,7 @@ with open("labels.pickle", "wb") as f:
 
 print(len(pictures))
 while True:
-    cv2.imshow('Image', pictures[3])
+    cv2.imshow('Image', pictures[4])
     if cv2.waitKey(1) == ord('q'):
         break
     if cv2.waitKey(1) == ord('r'):
