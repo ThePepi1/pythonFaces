@@ -36,6 +36,7 @@ while True:
             path_id, conf = recognizer.predict(region_of_interests_grey)
             photo = Image.open(new_paths[path_id])
             Position = True
+            print(conf)
             #drawing rectangle
         color = (255, 0, 0)
         stroke = 2
