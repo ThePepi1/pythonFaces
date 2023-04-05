@@ -45,7 +45,7 @@ print("Done")
 
 
 while True:
-    cv2.imshow('Image', pictures[10])
+    cv2.imshow('Image', pictures[8])
     if cv2.waitKey(1) == ord('q'):
         break
 
