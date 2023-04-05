@@ -4,6 +4,7 @@ import numpy
 import cv2
 import pickle
 face_Cascade2 = cv2.CascadeClassifier('cascades\data\haarcascade_frontalface_default.xml')
+face_Cascade3 = cv2.CascadeClassifier('cascades\data\haarcascade_frontalface_alt.xml')
 BASE_directory = os.path.dirname(os.path.abspath(__file__))
 images_directory = os.path.join(BASE_directory, 'imgs')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -28,7 +29,7 @@ for root , dirs, files  in os.walk(images_directory):
             
             id_ = paths[path]
             
-            faces = face_Cascade2.detectMultiScale(image_array, scaleFactor = 1.5, minNeighbors = 4)
+            faces = face_Cascade3.detectMultiScale(image_array, scaleFactor = 1.1, minNeighbors = 4)
             for (x, y, w, h) in faces:
                 region_of_interests = image_array[y:y+h, x:x+w] 
                 print(region_of_interests)
@@ -37,18 +38,14 @@ for root , dirs, files  in os.walk(images_directory):
 
 with open("labels.pickle", "wb") as f:
     pickle.dump(paths, f)  
-
 print(len(pictures))
-while True:
-    cv2.imshow('Image', pictures[0])
-    if cv2.waitKey(1) == ord('q'):
-        break
-    if cv2.waitKey(1) == ord('r'):
-        Position = False 
-
-
-
-
-
 recognizer.train(pictures, numpy.array(paths_list))
 recognizer.save("trainner.yml")
+print("Done")
+
+
+while True:
+    cv2.imshow('Image', pictures[10])
+    if cv2.waitKey(1) == ord('q'):
+        break
+
