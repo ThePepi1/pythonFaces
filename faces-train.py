@@ -28,7 +28,9 @@ for root , dirs, files  in os.walk(images_directory):
                 current_id += 1
             
             id_ = paths[path]
-            
+            if path.endswith("vi.jpg"):
+                pictures.append(image_array)
+                paths_list.append(id_)
             faces = face_Cascade3.detectMultiScale(image_array, scaleFactor = 1.1, minNeighbors = 4)
             for (x, y, w, h) in faces:
                 region_of_interests = image_array[y:y+h, x:x+w] 
