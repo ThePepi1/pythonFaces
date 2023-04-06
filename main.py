@@ -31,11 +31,12 @@ while True:
     for (x, y, w, h,) in faces:
         region_of_interests_grey = gray_img[y:y+h, x:x+w] 
 
-        #recognizing
+        #recognizingq
         if not Position:
             path_id, conf = recognizer.predict(region_of_interests_grey)
             photo = Image.open(new_paths[path_id])
             Position = True
+            cv2.destroyAllWindows()
             print(conf)
             #drawing rectangle
         color = (255, 0, 0)
@@ -49,19 +50,17 @@ while True:
 
     #display video
 
-    picture = img
+
     if Position:
         picture2 = numpy.array(photo, "uint8")
         picture2 = picture2[:,:,::-1]
-        if x > 0:
-            picture[y:end_coordinate_y,x:end_coordinate_x] = cv2.resize(picture2, (end_coordinate_y - y, end_coordinate_x - x))
-
-
-        
-    cv2.imshow('Image', picture)
+        cv2.imshow('Slika', picture2)
+    else:
+        cv2.imshow('Kamera',img)
     if cv2.waitKey(1) == ord('q'):
         break
     if cv2.waitKey(1) == ord('r'):
         Position = False 
+        cv2.destroyAllWindows()
 cap.release()
 cv2.destroyAllWindows()
